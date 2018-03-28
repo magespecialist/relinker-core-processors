@@ -34,7 +34,12 @@ class QueryString implements PostProcessorInterface
      */
     public function execute(string $url, RouteInterface $route, string $path): string
     {
-        if (trim($route->getQs())) {
+        $routeQs = $route->getQs();
+        if (!$routeQs) {
+            $routeQs = '';
+        }
+
+        if (trim($routeQs)) {
             $originalParams = $this->request->getParams();
 
             if (strpos($url, '?') !== false) {
@@ -45,7 +50,7 @@ class QueryString implements PostProcessorInterface
 
             // @codingStandardsIgnoreStart
             parse_str($queryString, $originalParams);
-            parse_str($route->getQs(), $additionalParams);
+            parse_str($routeQs, $additionalParams);
             // @codingStandardsIgnoreEnd
 
             $params = array_merge($originalParams, $additionalParams);
