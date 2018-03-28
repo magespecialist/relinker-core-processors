@@ -35,7 +35,7 @@ class RouteRepositoryInterfacePlugin
      * @return RouteInterface
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function afterGet(RouteRepositoryInterface $subject, $result): RouteInterface
+    public function afterGet(RouteRepositoryInterface $subject, $result)
     {
         $this->routeExPersist->load($result);
         return $result;
@@ -47,7 +47,7 @@ class RouteRepositoryInterfacePlugin
      * @return RouteInterface
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function afterGetByPath(RouteRepositoryInterface $subject, $result): RouteInterface
+    public function afterGetByPath(RouteRepositoryInterface $subject, $result)
     {
         $this->routeExPersist->load($result);
         return $result;
@@ -64,7 +64,7 @@ class RouteRepositoryInterfacePlugin
         RouteRepositoryInterface $subject,
         \Closure $procede,
         RouteInterface $route
-    ): int {
+    ) {
         $routeId = $procede($route);
         $route->setId($routeId);
         $this->routeExPersist->save($route);
