@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © MageSpecialist - Skeeller srl. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="MSP\ReLinker\Model\PostProcessor\PostProcessorChain">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item sortOrder="100" name="query_string"
+                      xsi:type="object">MSP\ReLinkerCoreProcessors\Model\PostProcessor\QueryString</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="MSP\ReLinker\Model\Processor\ProcessorRepository">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="product_by_sku"
+                      xsi:type="object">MSP\ReLinkerCoreProcessors\Model\Processor\ProductBySku</item>
+                <item name="admin_product_by_sku"
+                      xsi:type="object">MSP\ReLinkerCoreProcessors\Model\Processor\AdminProductBySku</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="MSP\ReLinker\Model\Walker\WalkerRepository">
+        <arguments>
+            <argument name="walkers" xsi:type="array">
+                <item name="product_by_sku"
+                      xsi:type="object">MSP\ReLinkerCoreProcessors\Model\Walker\ProductBySku</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="MSP\ReLinker\Ui\DataProvider\Form\Route\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="core_processors_ext_attrs"
+                      xsi:type="array">
+                    <item name="class"
+                          xsi:type="string">MSP\ReLinkerCoreProcessors\Ui\DataProvider\Form\Route\Modifier\ExtensionAttributes</item>
+                    <item name="sortOrder" xsi:type="number">10</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="\MSP\ReLinkerCoreProcessors\Api\Data\RouteExInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Api\RouteExRepositoryInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteExRepository"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Api\RouteExSearchResultsInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteExSearchResults"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\GetInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\Get"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\SaveInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\Save"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\DeleteInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\Delete"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\GetListInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\GetList"/>
+    <preference for="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\GetByRouteIdInterface"
+                type="\MSP\ReLinkerCoreProcessors\Model\RouteEx\Command\GetByRouteId"/>
+    <type name="MSP\ReLinkerApi\Api\RouteRepositoryInterface">
+        <plugin sortOrder="1" name="mSPReLinkerCoreProcessorsRouteRepositoryInterface"
+                type="MSP\ReLinkerCoreProcessors\Plugin\Api\RouteRepositoryInterfacePlugin"/>
+    </type>
+</config>
