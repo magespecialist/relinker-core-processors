@@ -11,7 +11,7 @@
     <type name="MSP\ReLinker\Model\PostProcessor\PostProcessorChain">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item sortOrder="100" name="query_string"
+                <item name="query_string"
                       xsi:type="object">MSP\ReLinkerCoreProcessors\Model\PostProcessor\QueryString</item>
             </argument>
         </arguments>
