@@ -3,7 +3,7 @@
     "description": "MSP Relinker core processors",
     "require": {
         "php": "^7.0|^7.1|^7.2",
-        "magento/magento2-base": "^2.2|^2.3",
+        "magento/magento2-base": "^2.1|^2.2|^2.3",
         "msp/module-relinker": "^0.1"
     },
     "authors": [
