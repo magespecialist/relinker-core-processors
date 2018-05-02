@@ -34,7 +34,7 @@ class QueryString implements PostProcessorInterface
      */
     public function execute(string $url, RouteInterface $route, string $path): string
     {
-        $routeQs = $route->getQs();
+        $routeQs = $route->getExtensionAttributes()->getQs();
         if (!$routeQs) {
             $routeQs = '';
         }
